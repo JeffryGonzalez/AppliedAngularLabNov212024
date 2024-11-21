@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { Component, ChangeDetectionStrategy, resource } from '@angular/core';
 
 export type BookEntity = {
@@ -12,15 +11,36 @@ export type BookEntity = {
   year: number;
   id: string;
 };
-
+type BookApiResponse = {
+  data: BookEntity[];
+};
 @Component({
   selector: 'app-books',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [JsonPipe],
+  imports: [],
   template: `
-
-
-    <pre>{{ books.value() | json }}</pre>
+    <div class="overflow-x-auto">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Year</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (book of books.value(); track book) {
+            <tr>
+              <th>{{ book.id }}</th>
+              <td>{{ book.title }}</td>
+              <td>{{ book.author }}</td>
+              <td>{{ book.year }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   `,
   styles: ``,
 })
