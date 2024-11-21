@@ -20,7 +20,6 @@ export type BookEntity = {
   template: `
     <div class="overflow-x-auto">
       <table class="table">
-        <!-- Headers -->
         <thead>
           <tr>
             <th>ID</th>
