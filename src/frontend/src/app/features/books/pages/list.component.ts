@@ -44,7 +44,9 @@ export type column = 'id' | 'title' | 'author' | 'year';
         @for (book of sorted(); track book) {
           <tr>
             <td>
-              <a routerLink="../detail/{{ book.id }}">{{ book.id }}</a>
+              <a routerLink="../detail/{{ book.id }}" class="btn btn-primary">{{
+                book.id
+              }}</a>
             </td>
             <td>{{ book.title }}</td>
             <td>{{ book.author }}</td>
