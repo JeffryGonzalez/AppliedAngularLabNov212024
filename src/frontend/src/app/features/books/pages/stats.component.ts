@@ -27,7 +27,7 @@ import { BookEntity } from '../books.component';
     </div>
   `,
 })
-export class ListComponent {
+export class StatsComponent {
   books = resource<BookEntity[], unknown>({
     loader: () =>
       fetch('/api/books')

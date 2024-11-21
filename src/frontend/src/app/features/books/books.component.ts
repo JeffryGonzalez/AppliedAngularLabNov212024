@@ -20,7 +20,7 @@ export type BookEntity = {
   template: `
     <div class="flex gap-8">
       <a class="btn btn-primary" routerLink="list">Book List</a>
-      <a class="btn btn-primary" routerLink="stats">Book List</a>
+      <a class="btn btn-primary" routerLink="stats">Book Stats</a>
     </div>
     <router-outlet />
   `,
