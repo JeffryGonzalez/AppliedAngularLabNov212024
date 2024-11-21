@@ -1,54 +1,20 @@
-import { Component, ChangeDetectionStrategy, resource } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
-export type BookEntity = {
-  author: string;
-  country: string;
-  imageLink: string;
-  language: string;
-  link: string;
-  pages: number;
-  title: string;
-  year: number;
-  id: string;
-};
-type BookApiResponse = {
-  data: BookEntity[];
-};
 @Component({
   selector: 'app-books',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [],
+  imports: [RouterOutlet, RouterLink],
   template: `
-    <div class="overflow-x-auto">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Year</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (book of books.value(); track book) {
-            <tr>
-              <th>{{ book.id }}</th>
-              <td>{{ book.title }}</td>
-              <td>{{ book.author }}</td>
-              <td>{{ book.year }}</td>
-            </tr>
-          }
-        </tbody>
-      </table>
+    <h3>Books</h3>
+    <div class="flex gap-8">
+      <a class="btn btn-primary btn-sm" routerLink="list">List of books</a>
+      <a class="btn btn-primary btn-sm" routerLink="stats">Book Stats</a>
+    </div>
+    <div class="p-12">
+      <router-outlet />
     </div>
   `,
   styles: ``,
 })
-export class BooksComponent {
-  books = resource<BookEntity[], unknown>({
-    loader: () =>
-      fetch('/api/books')
-        .then((res) => res.json())
-        .then((r) => r.data),
-  });
-}
+export class BooksComponent {}
