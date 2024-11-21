@@ -16,11 +16,31 @@ export type BookEntity = {
 @Component({
   selector: 'app-books',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [JsonPipe],
+  imports: [],
   template: `
-
-
-    <pre>{{ books.value() | json }}</pre>
+    <div class="overflow-x-auto">
+      <table class="table">
+        <!-- Headers -->
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>year</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (book of books.value(); track book.id) {
+            <tr>
+              <td>{{ book.id }}</td>
+              <td>{{ book.title }}</td>
+              <td>{{ book.author }}</td>
+              <td>{{ book.year }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   `,
   styles: ``,
 })
