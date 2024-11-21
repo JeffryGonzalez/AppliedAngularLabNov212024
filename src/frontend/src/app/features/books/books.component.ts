@@ -1,5 +1,5 @@
-import { JsonPipe } from '@angular/common';
-import { Component, ChangeDetectionStrategy, resource } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 export type BookEntity = {
   author: string;
@@ -16,19 +16,14 @@ export type BookEntity = {
 @Component({
   selector: 'app-books',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [JsonPipe],
+  imports: [RouterLink, RouterOutlet],
   template: `
-
-
-    <pre>{{ books.value() | json }}</pre>
+    <div class="flex gap-8">
+      <a class="btn btn-primary" routerLink="list">Book List</a>
+      <a class="btn btn-primary" routerLink="stats">Book Stats</a>
+    </div>
+    <router-outlet />
   `,
   styles: ``,
 })
-export class BooksComponent {
-  books = resource<BookEntity[], unknown>({
-    loader: () =>
-      fetch('/api/books')
-        .then((res) => res.json())
-        .then((r) => r.data),
-  });
-}
+export class BooksComponent {}
