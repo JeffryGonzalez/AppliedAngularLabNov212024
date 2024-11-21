@@ -1,34 +1,21 @@
-import { JsonPipe } from '@angular/common';
-import { Component, ChangeDetectionStrategy, resource } from '@angular/core';
-
-export type BookEntity = {
-  author: string;
-  country: string;
-  imageLink: string;
-  language: string;
-  link: string;
-  pages: number;
-  title: string;
-  year: number;
-  id: string;
-};
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-books',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [JsonPipe],
+  imports: [RouterOutlet, RouterLink],
   template: `
-
-
-    <pre>{{ books.value() | json }}</pre>
+    <h3>Books</h3>
+    <div class="flex gap-8">
+      <a class="btn btn-primary btn-sm" routerLink="list">List of books</a>
+      <a class="btn btn-primary btn-sm" routerLink="stats">Book Stats</a>
+      <a class="btn btn-primary btn-sm" routerLink="pref">Sorting Preference</a>
+    </div>
+    <div class="p-12">
+      <router-outlet />
+    </div>
   `,
   styles: ``,
 })
-export class BooksComponent {
-  books = resource<BookEntity[], unknown>({
-    loader: () =>
-      fetch('/api/books')
-        .then((res) => res.json())
-        .then((r) => r.data),
-  });
-}
+export class BooksComponent {}
