@@ -4,8 +4,10 @@ import {
   resource,
   signal,
   computed,
+  inject,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { BookSortStore } from '../services/book.service';
 
 export type BookEntity = {
   author: string;
@@ -55,8 +57,10 @@ export type column = 'id' | 'title' | 'author' | 'year';
   styles: ``,
 })
 export class ListComponent {
+  store = inject(BookSortStore);
   prevSortByCol = signal('id');
-  sortByCol = signal('id');
+  //sortByCol = signal('id');
+
   sortOrder = signal(true);
   books = resource<BookEntity[], unknown>({
     loader: () =>
@@ -88,7 +92,12 @@ export class ListComponent {
   );
   sortBy(column: string): void {
     if (this.prevSortByCol() === column) this.sortOrder.set(!this.sortOrder());
-    this.sortByCol.set(column);
+    //this.sortByCol.set(column);
+    this.store.setColumn(column);
     this.prevSortByCol.set(column);
+  }
+
+  sortByCol(): string {
+    return this.store.column();
   }
 }

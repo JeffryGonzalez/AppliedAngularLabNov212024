@@ -18,24 +18,24 @@ const initialState: SortState = {
   column: 'id',
   ascending: true,
 };
-export const CounterStore = signalStore(
+export const BookSortStore = signalStore(
   withDevtools('books'),
   withState<SortState>(initialState),
   withMethods((store) => {
     return {
-      setBy: (by: CountBy) => patchState(store, {}),
+      setColumn: (col: string) => patchState(store, { column: col }),
     };
   }),
   withComputed((store) => {
     return {
-      fizzBuzz: computed(() => {
-        return '';
+      order: computed(() => {
+        return store.ascending();
       }),
     };
   }),
   withHooks({
     onInit(store) {
-      const saved = localStorage.getItem('counter');
+      const saved = store.column();
     },
   }),
 );

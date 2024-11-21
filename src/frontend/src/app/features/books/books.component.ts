@@ -10,6 +10,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     <div class="flex gap-8">
       <a class="btn btn-primary btn-sm" routerLink="list">List of books</a>
       <a class="btn btn-primary btn-sm" routerLink="stats">Book Stats</a>
+      <a class="btn btn-primary btn-sm" routerLink="pref">Sorting Preference</a>
     </div>
     <div class="p-12">
       <router-outlet />
